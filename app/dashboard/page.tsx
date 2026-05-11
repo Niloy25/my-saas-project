@@ -1,10 +1,19 @@
+import { createClient } from "@/lib/supabase-server";
 import Layout from "@/components/layout";
+import CreateItemForm from "@/components/create-item-form";
+import ItemsList from "@/components/items-list";
 
-export default function Dashboard() {
+export default async function Dashboard() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   return (
-    <Layout>
-      <h1 className="text-2xl font-bold">Dashboard</h1>
-      <p className="text-gray-500 mt-2">Your data will appear here.</p>
+    <Layout userEmail={user?.email}>
+      <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
+      <CreateItemForm />
+      <ItemsList />
     </Layout>
   );
 }
