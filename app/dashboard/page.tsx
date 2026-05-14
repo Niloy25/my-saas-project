@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase-server";
 import Layout from "@/components/layout";
-import CreateItemForm from "@/components/create-item-form";
+import ItemForm from "@/components/item-form";
 import ItemsList from "@/components/items-list";
 
 export default async function Dashboard() {
@@ -12,8 +12,10 @@ export default async function Dashboard() {
   return (
     <Layout userEmail={user?.email}>
       <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
-      <CreateItemForm />
-      <ItemsList />
+      <ItemForm />
+      <div className="mt-6">
+        <ItemsList />
+      </div>
     </Layout>
   );
 }
